@@ -1,0 +1,27 @@
+<head>
+  <title>The Lipstick Dictionary</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      {{> loginButtons}}
+      <h1>The Lipstick Dictionary</h1>
+
+      {{#if currentUser}}
+        <button class="upload-button">Add Your Own</button>
+      {{/if}}
+    </header>
+
+
+  </div>
+</body>
+
+
+<template name="submission">
+    <form class="new-image">
+      <input type="text" name="sku">
+      <input class="file" type="file">
+      <input type="submit" value="Submit">
+    </form>
+</template>
