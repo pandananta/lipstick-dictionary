@@ -1,0 +1,22 @@
+body{
+	color: #66CDAA;
+	font-family: Futura, Tahoma, sans-serif;
+}
+
+#login-buttons{
+	float:right;
+}
+
+
+#login-buttons a{
+	color: #66CDAA;
+	text-decoration: none;
+	padding: 4px;
+	border: 1px solid #66CDAA;
+}
+
+#login-buttons a:hover{
+	color: #ff7c70;
+	border-color: #ff7c70;
+}
+
