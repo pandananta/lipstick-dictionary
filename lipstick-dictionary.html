@@ -5,23 +5,102 @@
 <body>
   <div class="container">
     <header>
-      <h1>The Lipstick Dictionary</h1>
+      <a href="/" id="logo"><h1>The Lipstick Dictionary</h1></a>
       {{> loginButtons}}
-
-      {{#if currentUser}}
-        <button class="upload-button">Add Your Own</button>
-      {{/if}}
     </header>
-
-
   </div>
 </body>
 
+<template name="home">
+  {{#if currentUser}}
+    <a href="/upload" class="upload-button button">Add Your Own</a>
+  {{/if}}
+</template>
 
 <template name="submission">
-    <form class="new-image">
-      <input type="text" name="sku">
+    <form id="new-image">
       <input class="file" type="file">
+      <br>
+      Product Name: 
+      <input type="text" name="sku">
+      <br>
+      Shade:
+      <input type="text" name="shade">
+      <br>
+      Color Category: 
+      <input type="text" name="colorCategory">
+      <br>
+      Product Type:
+      <select name="finish" form="new-image">
+        <option value="1">Lip Stick</option>
+        <option value="2">Lip Stain</option>
+        <option value="3">Lip Gloss</option>
+        <option value="4">Lip Balm</option>
+      </select>
+      <br>
+      Application: 
+      <select name="finish" form="new-image">
+        <option value="1">Gel</option>
+        <option value="2">Stick</option>
+        <option value="3">Liquid</option>
+        <option value="4">Pencil</option>
+      </select>
+      <br>
+      Link: 
+      <input type="text" name="url">
+      <br>
+      Price: 
+      <input type="text" name="price">
+      <br>
+      Finish: 
+      <select name="finish" form="new-image">
+        <option value="1">Matte</option>
+        <option value="2">Glossy</option>
+        <option value="3">Satin</option>
+        <option value="4">Silky</option>
+        <option value="5">Dry</option>
+      </select>
+      <br>
+      Intensity: 
+      <select name="finish" form="new-image">
+        <option value="1">Sheer</option>
+        <option value="2">Medium</option>
+        <option value="3">Opaque</option>
+        <option value="4">Extreme</option>
+      </select>
+      <br>
       <input type="submit" value="Submit">
+    </form>
+</template>
+
+
+<template name="account">
+    <form id="edit-account">
+      Skin Tone: <br>
+      <select name="skinTone" form="edit-account">
+        <option value="1">Fair</option>
+        <option value="2">Light</option>
+        <option value="3">Medium</option>
+        <option value="4">Tan</option>
+        <option value="5">Dark</option>
+      </select>
+      <br>
+      Eye Color: <br>
+      <select name="eyeColor" form="edit-account">
+        <option value="1">Brown</option>
+        <option value="2">Black</option>
+        <option value="3">Green</option>
+        <option value="4">Blue</option>
+      </select>
+      <br>
+      Hair Color: <br>
+      <select name="hairColor" form="edit-account">
+        <option value="1">Brown</option>
+        <option value="2">Black</option>
+        <option value="3">Blonde</option>
+        <option value="4">Red</option>
+      </select>
+      <br>
+      <input type="submit" value="Save">
     </form>
 </template>

@@ -3,8 +3,32 @@ body{
 	font-family: Futura, Tahoma, sans-serif;
 }
 
+#logo{
+	color: #66CDAA;
+	text-decoration: none;
+}
+
+#logo:hover{
+	color: #ff7c70;
+}
+
+
+.button{
+	color: #66CDAA;
+	text-decoration: none;
+	padding: 4px;
+	border: 1px solid #66CDAA;
+	display: inline;
+}
+
+.button:hover{
+	color: #ff7c70;
+	border-color: #ff7c70;
+}
+
 #login-buttons{
 	/*float:right;*/
+	margin-bottom: 20px;
 }
 
 
@@ -19,4 +43,5 @@ body{
 	color: #ff7c70;
 	border-color: #ff7c70;
 }
+
 

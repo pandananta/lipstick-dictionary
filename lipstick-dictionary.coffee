@@ -1,6 +1,15 @@
 Tests = new (Mongo.Collection)('tests')
 
-if Meteor.isClient  
+if Meteor.isClient
+  Router.route '/', ->
+    @render 'home'
+    return
+  Router.route '/account', ->
+    @render 'account'
+    return
+  Router.route '/upload', ->
+    @render 'submission'
+    return  
   Template.body.events 'click .upload-button': ->
     UI.insert UI.render(Template.submission), document.body
     return
