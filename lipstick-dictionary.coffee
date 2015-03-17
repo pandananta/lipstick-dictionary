@@ -14,24 +14,24 @@ if Meteor.isClient
     UI.insert UI.render(Template.submission), document.body
     return
   
-  Template.submission.events 
-  'submit .new-image': (event) ->
-    event.preventDefault()
-    Tests.insert
-      product: event.target.sku.value
-      createdAt: new Date
-      owner: Meteor.userId()
-      username: Meteor.user().username
-    return
-  'change #file-picker': (e, template) ->
-    file = template.find('input type=["file"]').files[0]
-    reader = new FileReader
-    reader.onload = (e) ->
-      $(template.find('img')).attr 'src', e.target.result
+  Template.submission.events
+    'change .file-picker': (event, template) ->
+      file = event.currentTarget.files[0]
+      reader = new FileReader
+      reader.onload = (event) ->
+        $(template.find('img')).attr 'src', event.target.result
+        return
+      reader.readAsDataURL file
+      return   
+    'submit .new-image': (event) ->
+      event.preventDefault()
+      Tests.insert
+        product: event.target.sku.value
+        createdAt: new Date
+        owner: Meteor.userId()
+        username: Meteor.user().username
       return
-
-    reader.readAsDataURL file
-    return  
+  
   
   Accounts.ui.config
     requestPermissions: facebook: [ 'public_profile' ]
