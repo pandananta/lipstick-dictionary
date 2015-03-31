@@ -14,3 +14,5 @@ less
 coffeescript
 iron:router
 jquery
+cfs:standard-packages
+cfs:gridfs

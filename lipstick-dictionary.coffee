@@ -1,4 +1,4 @@
-Tests = new (Mongo.Collection)('tests')
+Selfies = new (Mongo.Collection)('selfies')
 
 if Meteor.isClient
   Router.route '/', ->
@@ -10,12 +10,15 @@ if Meteor.isClient
   Router.route '/upload', ->
     @render 'submission'
     return  
-  Template.body.events 'click .upload-button': ->
+  Template.home.events 'click .upload-button': ->
     UI.insert UI.render(Template.submission), document.body
     return
-  
+  Template.home.helpers 
+    selfies: ->
+      Selfies.find {}
+
   Template.submission.events
-    'change .file-picker': (event, template) ->
+    'change .filepicker': (event, template) ->
       file = event.currentTarget.files[0]
       reader = new FileReader
       reader.onload = (event) ->
@@ -23,13 +26,27 @@ if Meteor.isClient
         return
       reader.readAsDataURL file
       return   
-    'submit .new-image': (event) ->
+    'submit #new-image': (event, template) ->
       event.preventDefault()
-      Tests.insert
+      productTypeIndex = event.target.productType.selectedIndex
+      applicationTypeIndex = event.target.applicationType.selectedIndex
+      finishIndex = event.target.finish.selectedIndex
+      intensityIndex = event.target.intensity.selectedIndex
+      Selfies.insert
+        image: $(template.find('img')).attr 'src'
         product: event.target.sku.value
+        shade: event.target.shade.value
+        colorCategory: event.target.colorCategory.value
+        product: event.target.sku.value
+        productType: event.target.productType.options[productTypeIndex].text
+        applicationType: event.target.applicationType.options[applicationTypeIndex].text
+        url: event.target.url.value
+        price: event.target.price.value
+        finish: event.target.finish.options[finishIndex].text
+        intensity: event.target.intensity.options[intensityIndex].text
         createdAt: new Date
-        owner: Meteor.userId()
         username: Meteor.user().username
+      Router.go('/')
       return
   
   

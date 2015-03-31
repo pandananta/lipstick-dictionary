@@ -1,11 +1,53 @@
+html{
+	height:100%;
+}
+
 body{
 	color: #66CDAA;
 	font-family: Futura, Tahoma, sans-serif;
+	width:100%;
+	height:100%;
+}
+
+form {
+	font-size: 20px;
+}
+
+input[type = "text"] {
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #66CDAA;
+	cursor: pointer;
+	background-color: transparent;
+	color:#ff7c70;
+}
+
+select {
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #66CDAA;
+	background-color: white;
+	cursor: pointer;
+	background-color: transparent;
+	color:#ff7c70;
+}
+
+.image-wrapper{
+	text-align: center;
 }
 
 #image-placeholder{
-	width: 200px;
-	height: 200px;
+	max-height:400px; 
+	max-width:400px; 
+	min-height:200px; 
+	width: auto;
+    height: auto;
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;
 }
 
 #logo{
@@ -26,6 +68,7 @@ body{
 	display: inline;
 	background-color: transparent;
 	cursor: pointer;
+	font-size: 20px;
 }
 
 .button:hover{
@@ -51,4 +94,29 @@ body{
 	border-color: #ff7c70;
 }
 
+.upload-form-wrapper{
+	width: 60%;
+	height: 70%;
+	background-color: #DCDCDC;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.wrapper-left{
+	width: 50%;
+	height:100%;
+	float: left;
+	position: relative;
+}
+
+.wrapper-right{
+	width: 50%;
+	height:100%;
+	float: left;
+}
+
+.selfie{
+	max-height: 200px;
+	max-width: 200px;
+}
 
