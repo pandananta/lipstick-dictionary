@@ -13,15 +13,21 @@
 
 <template name="home">
   {{#if currentUser}}
-    <a href="/upload" class="upload-button button">Add Your Own</a>
+    <div><a href="/upload" class="upload-button button">Add Your Own</a></div>
   {{/if}}
-  {{#each selfies}}
-    {{> selfie}}
-  {{/each}}
+  <div class = "content">
+    {{#each selfies}}
+      {{> selfie}}
+    {{/each}}
+  </div>
 </template>
 
 <template name="selfie">
-  <img class="selfie" src={{image}}>
+  <a href="#" class="selfie button"><img class="selfie-image" src={{image}}></a>
+</template>
+
+<template name="selfie-modal">
+  <div class="selfie-modal"><img class="selfie-image" src={{image}}></div>
 </template>
 
 <template name="submission">

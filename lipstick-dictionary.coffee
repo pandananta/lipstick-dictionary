@@ -10,7 +10,7 @@ if Meteor.isClient
   Router.route '/upload', ->
     @render 'submission'
     return  
-  Template.home.events 'click .upload-button': ->
+  Template.body.events 'click .upload-button': ->
     UI.insert UI.render(Template.submission), document.body
     return
   Template.home.helpers 

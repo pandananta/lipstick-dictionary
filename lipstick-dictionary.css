@@ -7,10 +7,15 @@ body{
 	font-family: Futura, Tahoma, sans-serif;
 	width:100%;
 	height:100%;
+	padding: 40px;
 }
 
 form {
 	font-size: 20px;
+}
+
+.upload-button{
+	display:block;
 }
 
 input[type = "text"] {
@@ -115,8 +120,26 @@ select {
 	float: left;
 }
 
+.selfie-image{
+	max-height: 170px;
+	max-width: 170px;
+	width: auto;
+    height: auto;
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;
+}
+
 .selfie{
-	max-height: 200px;
-	max-width: 200px;
+	position:relative;
+	margin-top:30px;
+	margin-right:30px;
+	height:200px;
+	width:200px;
+	border: 1px solid;
+	display: inline-block;
 }
 
