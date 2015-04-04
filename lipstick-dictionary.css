@@ -5,9 +5,10 @@ html{
 body{
 	color: #66CDAA;
 	font-family: Futura, Tahoma, sans-serif;
-	width:100%;
+	width:100% -40px;
 	height:100%;
 	padding: 40px;
+	margin: 0;
 }
 
 form {
@@ -141,5 +142,29 @@ select {
 	width:200px;
 	border: 1px solid;
 	display: inline-block;
+}
+
+.modalBackdrop{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width:100%;
+	height: 100%;
+	padding: 0;
+	background-color: blue;
+	overflow:hidden;
+  	background-color: black;
+  	opacity:0.6;
+  	filter:alpha(opacity=60); /* For IE8 and earlier */
+  	cursor: pointer;
+}
+
+.modalBody{
+	position:fixed;
+	height: 50%;
+	width: 50%;
+	top: 25%;
+	left: 25%;
+	background-color: white;
 }
 

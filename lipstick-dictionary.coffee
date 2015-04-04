@@ -17,6 +17,17 @@ if Meteor.isClient
     selfies: ->
       Selfies.find {}
 
+  Template.selfie.events
+    'click .selfie': (event, template) ->
+      id = event.currentTarget.id
+      data = Selfies.findOne _id: id
+      UI.insert UI.renderWithData(Template.selfieModal, data), document.body
+  Template.selfieModal.events
+    'click .modalBackdrop': (event, template) ->
+      event.preventDefault()
+      UI.remove template.view
+      return false
+
   Template.submission.events
     'change .filepicker': (event, template) ->
       file = event.currentTarget.files[0]

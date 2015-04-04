@@ -23,11 +23,16 @@
 </template>
 
 <template name="selfie">
-  <a href="#" class="selfie button"><img class="selfie-image" src={{image}}></a>
+  <a href="#" class="selfie button" id="{{_id}}"><img class="selfie-image" src={{image}}></a>
 </template>
 
-<template name="selfie-modal">
-  <div class="selfie-modal"><img class="selfie-image" src={{image}}></div>
+<template name="selfieModal">
+  <div class="modalWrapper">
+    <div class="modalBackdrop"></div>
+    <div class="modalBody">
+        <div class="selfie-modal"><h1>OMG OMG OMG YOLO</h1><img class="selfie-image" src={{image}}></div>
+    </div>
+  </div>
 </template>
 
 <template name="submission">
