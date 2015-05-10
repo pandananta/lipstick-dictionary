@@ -10,9 +10,8 @@ insecure
 accounts-ui
 accounts-password
 accounts-facebook
-less
 coffeescript
 iron:router
 jquery
-cfs:standard-packages
-cfs:gridfs
+semantic:ui
+flemay:less-autoprefixer

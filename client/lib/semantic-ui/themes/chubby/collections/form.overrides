@@ -1,0 +1,12 @@
+/*
+  DO NOT MODIFY - This file has been generated and will be regenerated
+  Semantic UI v1.12.1
+*/
+/*-------------------
+   Form Variables
+--------------------*/
+
+.ui.form .selection.dropdown {
+  padding: 1.1em 1.2em;
+  border-width: 2px;
+}

@@ -3,36 +3,120 @@
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <a href="/" id="logo"><h1>The Lipstick Dictionary</h1></a>
-      {{> loginButtons}}
-    </header>
-  </div>
 </body>
+
+
+
+<template name="layout">
+  <header>
+    <a href="/" id="logo"><h1>The Lipstick Dictionary</h1></a>
+    {{> loginButtons}}
+  </header>
+  <div class="container">
+    <div class="ui segment">
+      {{> yield}}
+    </div>
+  </div>
+</template>
 
 <template name="home">
   {{#if currentUser}}
-    <div><a href="/upload" class="upload-button button">Add Your Own</a></div>
+    <div><a href="/upload" class="upload-button ui teal button">Add Your Own</a></div>
   {{/if}}
-  <div class = "content">
+  {{>filters}}
+  <div class="ui cards">
     {{#each selfies}}
       {{> selfie}}
     {{/each}}
   </div>
 </template>
 
-<template name="selfie">
-  <a href="#" class="selfie button" id="{{_id}}"><img class="selfie-image" src={{image}}></a>
-</template>
-
-<template name="selfieModal">
-  <div class="modalWrapper">
-    <div class="modalBackdrop"></div>
-    <div class="modalBody">
-        <div class="selfie-modal"><h1>OMG OMG OMG YOLO</h1><img class="selfie-image" src={{image}}></div>
+<template name="dropdown">
+  <div class="ui simple dropdown item" id="{{id}}">
+    {{title}}
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      {{#each attributes}}
+        <div class="item">{{this}}</div>
+      {{/each}}
     </div>
   </div>
+</template>
+
+<template name ="filters">
+  <div class="ui compact menu">
+
+    {{#with title="Color" attribute="colorCategory"}}
+      {{> dropdown dropdownOneAttributes}}
+    {{/with}}
+
+    {{#with title="Product Type" attribute="productType"}}
+      {{> dropdown dropdownOneAttributes}}
+    {{/with}}
+
+    {{#with title="Applicator" attribute="applicationType"}}
+      {{> dropdown dropdownOneAttributes}}
+    {{/with}}
+
+    {{#with title="Finish" attribute="finish"}}
+      {{> dropdown dropdownOneAttributes}}
+    {{/with}}
+
+    {{#with title="Intensity" attribute="intensity"}}
+      {{> dropdown dropdownOneAttributes}}
+    {{/with}}
+
+    {{#with title="Price" attribute="price"}}
+      {{> dropdown dropdownOneAttributes}}
+    {{/with}}
+  </div>
+</template>
+
+<template name="selfie">
+  <div class="selfie ui card" id ="{{_id}}">
+  <div class="image" href="/">
+    <img src={{image}}>
+  </div>
+  <div class="content">
+    <a class="header">{{product}}</a>
+    <div class="meta">
+      <span class="date">in {{shade}}</span>
+      <span class="right floated like">
+      <i class="like icon"></i>
+    </span>
+    </div>
+  </div>
+</div>
+<div class="ui modal" id="modal-{{_id}}">
+  <i class="close icon"></i>
+  <div class="header">
+    {{product}} in {{shade}}
+  </div>
+  <div class="content">
+    <div class="ui medium image">
+      <img src={{image}}>
+    </div>
+    <div class="description">
+      <div class="ui header">"LOPES lope lope lope lope lope lope lope"</div>
+      <ul>
+        <li>consistency</li>
+        <li>type</li>
+        <li>finish</li>
+        <li>price</li>
+        <li>Notes from user</li>
+      </ul>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button">
+      Purchace from Birchbox
+      <i class="angle double right icon"></i>
+    </div>
+  </div>
+</div>
 </template>
 
 <template name="submission">
@@ -44,13 +128,13 @@
       <form id="new-image">
         <input class="filepicker" name="filepicker" type="file">
         <br>
-        Product Name: 
+        Product Name:
         <input type="text" name="sku">
         <br>
         Shade:
         <input type="text" name="shade">
         <br>
-        Color Category: 
+        Color Category:
         <input type="text" name="colorCategory">
         <br>
         Product Type:
@@ -62,7 +146,7 @@
           <option value="4">Lip Balm</option>
         </select>
         <br>
-        Application Type: 
+        Application Type:
         <select name="applicationType" form="new-image">
           <option value="11"></option>
           <option value="1">Gel</option>
@@ -71,13 +155,13 @@
           <option value="4">Pencil</option>
         </select>
         <br>
-        Link: 
+        Link:
         <input type="text" name="url">
         <br>
-        Price: 
+        Price:
         <input type="text" name="price">
         <br>
-        Finish: 
+        Finish:
         <select name="finish" form="new-image">
           <option value="11"></option>
           <option value="1">Matte</option>
@@ -87,7 +171,7 @@
           <option value="5">Dry</option>
         </select>
         <br>
-        Intensity: 
+        Intensity:
         <select name="intensity" form="new-image">
           <option value="11"></option>
           <option value="1">Sheer</option>
