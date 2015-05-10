@@ -1,14 +1,22 @@
 var Selfies = new Mongo.Collection('selfies');
 var ATTRIBUTES = {
   colorCategory: ["red", "pink", "orange", "nude", "brown", "purple", "other"],
-  productType: ["lip stick", "lip stain", "lip gloss", "lip balm"],
-  applicationType: ["gel", "stick", "liquid", "pencil"],
-  finish: ["matte", "glossy", "silky", "satin", "dry"],
-  intensity: ["sheer", "medium", "opaque", "intsense", "extreme"],
+  productType: ["Lip stick", "Lip stain", "Lip gloss", "Lip balm"],
+  applicationType: ["Gel", "Stick", "Liquid", "Pencil"],
+  finish: ["Matte", "Glossy", "Silky", "Satin", "Dry"],
+  intensity: ["Sheer", "Medium", "Opaque", "Intsense", "Extreme"],
   price: ["$", "$$", "$$$"]
-}
+};
+var SELECTALL = {
+  finish:"Glossy",
+  intensity:{$in: ["Opaque", "Medium"]},
+};
 
 if (Meteor.isClient) {
+  Session.set({
+    "filterSelections": {}
+  });
+
   Router.configure({
     layoutTemplate: 'layout'
   });
@@ -28,16 +36,46 @@ if (Meteor.isClient) {
   });
   Template.home.helpers({
     selfies: function() {
-      return Selfies.find({});
+      return Selfies.find(Session.get("filterSelections"));
     }
   });
   Template.filters.helpers({
-    dropdownOneAttributes: function() {
+    dropdownAttributes: function() {
       return {
         title: this.title,
         id: this.attribute,
         attributes: ATTRIBUTES[this.attribute],
       };
+    }
+  });
+  Template.dropdownItem.events({
+    'click .item': function(event, template) {
+      var filter = this.filter;
+      var attribute = this.attribute;
+      var selections = Session.get("filterSelections");
+      if(selections[filter]){
+        if(selections[filter]["$in"].indexOf(attribute) >= 0){
+          selections[filter]["$in"].splice(selections[filter]["$in"].indexOf(attribute), 1 );
+          if(selections[filter]["$in"].length==0){
+            delete selections[filter];
+          }
+        } else {
+          selections[filter]["$in"].push(attribute);
+        }
+      } else {
+        selections[filter] = {"$in":new Array(attribute)};
+      }
+      console.log(selections);
+      Session.set("filterSelections", selections);
+    }
+  });
+  Template.dropdownItem.helpers({
+    selected: function(filter, attribute) {
+      if(Session.get("filterSelections")[filter] && Session.get("filterSelections")[filter]["$in"].indexOf(attribute) >=0){
+        return "selected active";
+      } else {
+        return "";
+      }
     }
   });
   Template.selfie.events({

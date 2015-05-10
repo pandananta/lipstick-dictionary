@@ -37,37 +37,41 @@
     <i class="dropdown icon"></i>
     <div class="menu">
       {{#each attributes}}
-        <div class="item">{{this}}</div>
+        {{> dropdownItem filter=../id attribute=this}}
       {{/each}}
     </div>
   </div>
+</template>
+
+<template name="dropdownItem">
+  <div class="item {{selected filter attribute}}">{{attribute}}</div>
 </template>
 
 <template name ="filters">
   <div class="ui compact menu">
 
     {{#with title="Color" attribute="colorCategory"}}
-      {{> dropdown dropdownOneAttributes}}
+      {{> dropdown dropdownAttributes}}
     {{/with}}
 
     {{#with title="Product Type" attribute="productType"}}
-      {{> dropdown dropdownOneAttributes}}
+      {{> dropdown dropdownAttributes}}
     {{/with}}
 
     {{#with title="Applicator" attribute="applicationType"}}
-      {{> dropdown dropdownOneAttributes}}
+      {{> dropdown dropdownAttributes}}
     {{/with}}
 
     {{#with title="Finish" attribute="finish"}}
-      {{> dropdown dropdownOneAttributes}}
+      {{> dropdown dropdownAttributes}}
     {{/with}}
 
     {{#with title="Intensity" attribute="intensity"}}
-      {{> dropdown dropdownOneAttributes}}
+      {{> dropdown dropdownAttributes}}
     {{/with}}
 
     {{#with title="Price" attribute="price"}}
-      {{> dropdown dropdownOneAttributes}}
+      {{> dropdown dropdownAttributes}}
     {{/with}}
   </div>
 </template>
