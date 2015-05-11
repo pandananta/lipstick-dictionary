@@ -1,15 +1,11 @@
 var Selfies = new Mongo.Collection('selfies');
 var ATTRIBUTES = {
   colorCategory: ["red", "pink", "orange", "nude", "brown", "purple", "other"],
-  productType: ["Lip stick", "Lip stain", "Lip gloss", "Lip balm"],
+  productType: ["Lip Stick", "Lip Stain", "Lip Gloss", "Lip Balm"],
   applicationType: ["Gel", "Stick", "Liquid", "Pencil"],
   finish: ["Matte", "Glossy", "Silky", "Satin", "Dry"],
   intensity: ["Sheer", "Medium", "Opaque", "Intsense", "Extreme"],
   price: ["$", "$$", "$$$"]
-};
-var SELECTALL = {
-  finish:"Glossy",
-  intensity:{$in: ["Opaque", "Medium"]},
 };
 
 if (Meteor.isClient) {
@@ -46,6 +42,11 @@ if (Meteor.isClient) {
         id: this.attribute,
         attributes: ATTRIBUTES[this.attribute],
       };
+    }
+  });
+  Template.filters.events({
+    'click .clear-button': function(event, template) {
+      Session.set("filterSelections", {});
     }
   });
   Template.dropdownItem.events({

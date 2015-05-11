@@ -9,7 +9,7 @@
 
 <template name="layout">
   <header>
-    <a href="/" id="logo"><h1>The Lipstick Dictionary</h1></a>
+    <a href="/"><h1>The Lipstick Dictionary</h1></a>
     {{> loginButtons}}
   </header>
   <div class="container">
@@ -20,9 +20,6 @@
 </template>
 
 <template name="home">
-  {{#if currentUser}}
-    <div><a href="/upload" class="upload-button ui teal button">Add Your Own</a></div>
-  {{/if}}
   {{>filters}}
   <div class="ui cards">
     {{#each selfies}}
@@ -50,7 +47,7 @@
 <template name ="filters">
   <div class="ui compact menu">
 
-    {{#with title="Color" attribute="colorCategory"}}
+    {{#with title="Color Family" attribute="colorCategory"}}
       {{> dropdown dropdownAttributes}}
     {{/with}}
 
@@ -73,7 +70,12 @@
     {{#with title="Price" attribute="price"}}
       {{> dropdown dropdownAttributes}}
     {{/with}}
+
+    <a class="active teal item clear-button">Clear</a>
   </div>
+  {{#if currentUser}}
+    <a href="/upload" class="ui teal button">Add Your Own</a>
+  {{/if}}
 </template>
 
 <template name="selfie">
