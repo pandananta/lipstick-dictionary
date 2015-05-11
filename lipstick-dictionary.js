@@ -79,6 +79,31 @@ if (Meteor.isClient) {
       }
     }
   });
+  Template.selectedOptionItem.events({
+    'click .item': function() {
+      var filter = this.filter;
+      var attribute = this.attribute;
+      var selections = Session.get("filterSelections");
+      if(selections[filter]){
+        if(selections[filter]["$in"].indexOf(attribute) >= 0){
+          selections[filter]["$in"].splice(selections[filter]["$in"].indexOf(attribute), 1 );
+          if(selections[filter]["$in"].length==0){
+            delete selections[filter];
+          }
+        }
+      }
+      Session.set("filterSelections", selections);
+    }
+  });
+  Template.dropdown.helpers({
+    selectedOptions: function(filter) {
+      if(Session.get("filterSelections")[filter]){
+        return Session.get("filterSelections")[filter]["$in"];
+      } else {
+        return "";
+      }
+    }
+  });
   Template.selfie.events({
     'click .selfie': function(event, template) {
       var data, id, modalId;
