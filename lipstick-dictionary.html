@@ -29,21 +29,12 @@
 </template>
 
 <template name="dropdown">
-  <div class="field">
-    <div class="ui vertical menu">
-      <div class="ui item" id="{{id}}">
-        <div class="ui fluid simple dropdown">
-          {{title}}
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            {{#each attributes}}
-              {{> dropdownItem filter=../id attribute=this}}
-            {{/each}}
-          </div>
-        </div>
-      </div>
-      {{#each selectedOptions id}}
-        {{> selectedOptionItem filter=../id attribute=this}}
+  <div class="ui simple dropdown item" id="{{id}}">
+    {{title}}
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      {{#each attributes}}
+        {{> dropdownItem filter=../id attribute=this}}
       {{/each}}
     </div>
   </div>
@@ -62,32 +53,37 @@
   {{#if currentUser}}
     <a href="/upload" class="ui teal button">Add Your Own</a>
   {{/if}}
-  <div class="ui fluid form">
-    <div class="six fields">
-        {{#with title="Color Family" attribute="colorCategory"}}
-          {{> dropdown dropdownAttributes}}
-        {{/with}}
+  <div class="ui menu">
+    {{#with title="Color Family" attribute="colorCategory"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
 
-        {{#with title="Product Type" attribute="productType"}}
-          {{> dropdown dropdownAttributes}}
-        {{/with}}
+    {{#with title="Product Type" attribute="productType"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
 
-        {{#with title="Applicator" attribute="applicationType"}}
-          {{> dropdown dropdownAttributes}}
-        {{/with}}
+    {{#with title="Applicator" attribute="applicationType"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
 
-        {{#with title="Finish" attribute="finish"}}
-          {{> dropdown dropdownAttributes}}
-        {{/with}}
+    {{#with title="Finish" attribute="finish"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
 
-        {{#with title="Intensity" attribute="intensity"}}
-          {{> dropdown dropdownAttributes}}
-        {{/with}}
+    {{#with title="Intensity" attribute="intensity"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
 
-        {{#with title="Price" attribute="price"}}
-          {{> dropdown dropdownAttributes}}
-        {{/with}}
-      </div>
+    {{#with title="Price" attribute="price"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
+  </div>
+  <div class="menu">
+    {{#each attributeList}}
+      {{#each selectedOptions this}}
+        {{> selectedOptionItem filter=.. attribute=this}}
+      {{/each}}
+    {{/each}}
   </div>
 </template>
 

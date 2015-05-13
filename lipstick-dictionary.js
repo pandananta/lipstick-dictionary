@@ -42,6 +42,16 @@ if (Meteor.isClient) {
         id: this.attribute,
         attributes: ATTRIBUTES[this.attribute],
       };
+    },
+    selectedOptions: function(filter) {
+      if(Session.get("filterSelections")[filter]){
+        return Session.get("filterSelections")[filter]["$in"];
+      } else {
+        return "";
+      }
+    },
+    attributeList: function() {
+      return $.map(ATTRIBUTES, function(v, i){return i;});
     }
   });
   Template.filters.events({
