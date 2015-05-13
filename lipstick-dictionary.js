@@ -5,7 +5,11 @@ var ATTRIBUTES = {
   applicationType: ["Gel", "Stick", "Liquid", "Pencil"],
   finish: ["Matte", "Glossy", "Silky", "Satin", "Dry"],
   intensity: ["Sheer", "Medium", "Opaque", "Intsense", "Extreme"],
-  price: ["$", "$$", "$$$"]
+  price: ["$", "$$", "$$$"], 
+  skinTone: ["Fair", "Light", "Medium", "Tan", "Dark"],
+  concern: ["Multi colored lips", "Small lips", "Uneven lips"],
+  hairColor: ["Brown","Black","Red","Brown"],
+  eyeColor: ["Brown","Black","Green","Blue"],
 };
 
 if (Meteor.isClient) {
@@ -19,7 +23,7 @@ if (Meteor.isClient) {
   Router.route('/', function() {
     this.render('home');
   });
-  Router.route('/account', function() {
+  Router.route('/me', function() {
     this.render('account');
   });
   Router.route('/upload', function() {
@@ -36,6 +40,11 @@ if (Meteor.isClient) {
     },
     noSelfies: function() {
       return  Selfies.find(Session.get("filterSelections")).count() === 0;
+    }
+  });
+  Template.account.helpers({
+    mySelfies: function() {
+      return Selfies.find({username:Meteor.user().username});
     }
   });
   Template.filters.helpers({
@@ -158,6 +167,10 @@ if (Meteor.isClient) {
         price: event.target.price.value,
         finish: event.target.finish.options[finishIndex].text,
         intensity: event.target.intensity.options[intensityIndex].text,
+        skinTone: user.profile.skinTone,
+        concern: user.profile.concern,
+        hairColor: user.profile.hairColor,
+        eyeColor: user.profile.eyeColor,
         createdAt: new Date,
         username: Meteor.user().username
       });

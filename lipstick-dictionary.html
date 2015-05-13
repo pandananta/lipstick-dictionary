@@ -80,6 +80,22 @@
       {{> dropdown dropdownAttributes}}
     {{/with}}
 
+    {{#with title="Price" attribute="skinTone"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
+
+    {{#with title="hair Color" attribute="hairColor"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
+
+    {{#with title="Eye Color" attribute="eyeColor"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
+
+    {{#with title="Special Concerns" attribute="concern"}}
+      {{> dropdown dropdownAttributes}}
+    {{/with}}
+
     {{#if shouldDisplayClear}}
       <a class="active teal item clear-button">Clear Filters</a>
     {{/if}}
@@ -146,7 +162,7 @@
       <div class="image-wrapper"><img id="image-placeholder" src="https://s3-us-west-2.amazonaws.com/liptionary/Placeholder_person_lips.jpg"></div>
     </div>
     <div class="wrapper-right">
-      <form id="new-image">
+      <form id="new-image" class="ui form">
         <input class="filepicker" name="filepicker" type="file">
         <br>
         Product Name:
@@ -209,7 +225,8 @@
 
 
 <template name="account">
-    <form id="edit-account">
+  {{#if currentUser}}
+    <form id="edit-account" class="ui form">
       Skin Tone: <br>
       <select name="skinTone" form="edit-account">
         <option value="11"></option>
@@ -240,4 +257,9 @@
       <br>
       <input type="submit" value="Save">
     </form>
+    <a href="/upload" class="ui teal button">Add A Selfie</a>
+    {{#each mySelfies}}
+      {{> selfie}}
+    {{/each}}
+  {{/if}}
 </template>
