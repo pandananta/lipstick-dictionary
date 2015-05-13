@@ -33,6 +33,9 @@ if (Meteor.isClient) {
   Template.home.helpers({
     selfies: function() {
       return Selfies.find(Session.get("filterSelections"));
+    },
+    noSelfies: function() {
+      return  Selfies.find(Session.get("filterSelections")).count() === 0;
     }
   });
   Template.filters.helpers({
@@ -52,6 +55,9 @@ if (Meteor.isClient) {
     },
     attributeList: function() {
       return $.map(ATTRIBUTES, function(v, i){return i;});
+    },
+    shouldDisplayClear: function() {
+      return Object.keys(Session.get("filterSelections")).length !== 0;
     }
   });
   Template.filters.events({
@@ -76,7 +82,6 @@ if (Meteor.isClient) {
       } else {
         selections[filter] = {"$in":new Array(attribute)};
       }
-      console.log(selections);
       Session.set("filterSelections", selections);
     }
   });

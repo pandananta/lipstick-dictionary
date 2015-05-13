@@ -25,6 +25,9 @@
     {{#each selfies}}
       {{> selfie}}
     {{/each}}
+    {{#if noSelfies}}
+      <h1>Sorry, there are no selfies to display :(</h1>
+    {{/if}}
   </div>
 </template>
 
@@ -49,7 +52,6 @@
 </template>
 
 <template name ="filters">
-  <a class="ui button">Clear</a>
   {{#if currentUser}}
     <a href="/upload" class="ui teal button">Add Your Own</a>
   {{/if}}
@@ -77,6 +79,10 @@
     {{#with title="Price" attribute="price"}}
       {{> dropdown dropdownAttributes}}
     {{/with}}
+
+    {{#if shouldDisplayClear}}
+      <a class="active teal item clear-button">Clear Filters</a>
+    {{/if}}
   </div>
   <div class="menu">
     {{#each attributeList}}
