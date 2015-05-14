@@ -5,7 +5,7 @@ var ATTRIBUTES = {
   applicationType: ["Gel", "Stick", "Liquid", "Pencil"],
   finish: ["Matte", "Glossy", "Silky", "Satin", "Dry"],
   intensity: ["Sheer", "Medium", "Opaque", "Intsense", "Extreme"],
-  price: ["$", "$$", "$$$"], 
+  priceGroup: ["$", "$$", "$$$"], 
   skinTone: ["Fair", "Light", "Medium", "Tan", "Dark"],
   concern: ["Multi colored lips", "Small lips", "Uneven lips"],
   hairColor: ["Brown","Black","Red","Brown"],
@@ -150,12 +150,17 @@ if (Meteor.isClient) {
       reader.readAsDataURL(file);
     },
     'submit #new-image': function(event, template) {
-      var applicationTypeIndex, finishIndex, intensityIndex, productTypeIndex;
+      var applicationTypeIndex, finishIndex, intensityIndex, productTypeIndex, price, priceGroup, user;
       event.preventDefault();
       productTypeIndex = event.target.productType.selectedIndex;
       applicationTypeIndex = event.target.applicationType.selectedIndex;
       finishIndex = event.target.finish.selectedIndex;
       intensityIndex = event.target.intensity.selectedIndex;
+      price = event.target.price.value;
+      user = Meteor.user();
+      if (price < 10){priceGroup = "$";}
+      else if (price < 20){priceGroup = "$$";}
+      else{priceGroup = "$$$"};
       Selfies.insert({
         image: $(template.find('img')).attr('src'),
         product: event.target.sku.value,
@@ -164,7 +169,8 @@ if (Meteor.isClient) {
         productType: event.target.productType.options[productTypeIndex].text,
         applicationType: event.target.applicationType.options[applicationTypeIndex].text,
         url: event.target.url.value,
-        price: event.target.price.value,
+        price: price,
+        priceGroup: priceGroup,
         finish: event.target.finish.options[finishIndex].text,
         intensity: event.target.intensity.options[intensityIndex].text,
         skinTone: user.profile.skinTone,
@@ -172,7 +178,7 @@ if (Meteor.isClient) {
         hairColor: user.profile.hairColor,
         eyeColor: user.profile.eyeColor,
         createdAt: new Date,
-        username: Meteor.user().username
+        username: user.username
       });
       Router.go('/');
     }

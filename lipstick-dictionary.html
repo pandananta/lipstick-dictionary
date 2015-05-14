@@ -21,13 +21,11 @@
 
 <template name="home">
   {{>filters}}
+  <p>Displaying {{selfies.count}} selfies</p>
   <div class="ui cards">
     {{#each selfies}}
       {{> selfie}}
     {{/each}}
-    {{#if noSelfies}}
-      <h1>Sorry, there are no selfies to display :(</h1>
-    {{/if}}
   </div>
 </template>
 
@@ -76,15 +74,15 @@
       {{> dropdown dropdownAttributes}}
     {{/with}}
 
-    {{#with title="Price" attribute="price"}}
+    {{#with title="Price" attribute="priceGroup"}}
       {{> dropdown dropdownAttributes}}
     {{/with}}
 
-    {{#with title="Price" attribute="skinTone"}}
+    {{#with title="Skin Tone" attribute="skinTone"}}
       {{> dropdown dropdownAttributes}}
     {{/with}}
 
-    {{#with title="hair Color" attribute="hairColor"}}
+    {{#with title="Hair Color" attribute="hairColor"}}
       {{> dropdown dropdownAttributes}}
     {{/with}}
 
@@ -100,7 +98,7 @@
       <a class="active teal item clear-button">Clear Filters</a>
     {{/if}}
   </div>
-  <div class="menu">
+  <div class="ui text menu">
     {{#each attributeList}}
       {{#each selectedOptions this}}
         {{> selectedOptionItem filter=.. attribute=this}}
@@ -126,21 +124,20 @@
 </div>
 <div class="ui modal" id="modal-{{_id}}">
   <i class="close icon"></i>
-  <div class="header">
-    {{product}} in {{shade}}
-  </div>
+  <div class="header"></div>
   <div class="content">
     <div class="ui medium image">
       <img src={{image}}>
     </div>
     <div class="description">
-      <div class="ui header">"LOPES lope lope lope lope lope lope lope"</div>
+      <div class="ui header">{{product}} in {{shade}}</div>
+      More by <a href="/{{username}}">{{username}}</a> 
       <ul>
-        <li>consistency</li>
-        <li>type</li>
-        <li>finish</li>
-        <li>price</li>
-        <li>Notes from user</li>
+        <li>Applicator: {{applicationType}}</li>
+        <li>Product Type: {{productType}}</li>
+        <li>Finish: {{finish}}</li>
+        <li>Price: {{price}}</li>
+        <li>Intensity: {{intensity}}</li>
       </ul>
     </div>
   </div>
@@ -148,10 +145,10 @@
     <div class="ui black button">
       Cancel
     </div>
-    <div class="ui positive right labeled icon button">
+    <a class="ui positive right labeled icon button" href="{{url}}" target="_blank">
       Purchace from Birchbox
       <i class="angle double right icon"></i>
-    </div>
+    </a>
   </div>
 </div>
 </template>
@@ -258,8 +255,10 @@
       <input type="submit" value="Save">
     </form>
     <a href="/upload" class="ui teal button">Add A Selfie</a>
-    {{#each mySelfies}}
-      {{> selfie}}
-    {{/each}}
+    <div class="ui cards">
+      {{#each mySelfies}}
+        {{> selfie}}
+      {{/each}}
+    </div>
   {{/if}}
 </template>
