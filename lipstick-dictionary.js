@@ -8,7 +8,7 @@ var ATTRIBUTES = {
   priceGroup: ["$", "$$", "$$$"], 
   skinTone: ["Fair", "Light", "Medium", "Tan", "Dark"],
   concern: ["Multi colored lips", "Small lips", "Uneven lips"],
-  hairColor: ["Brown","Black","Red","Brown"],
+  hairColor: ["Brown","Black","Red","Brown", "Dyed"],
   eyeColor: ["Brown","Black","Green","Blue"],
 };
 

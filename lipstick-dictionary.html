@@ -223,8 +223,9 @@
 
 <template name="account">
   {{#if currentUser}}
+    <h1>My Profile</h1>
     <form id="edit-account" class="ui form">
-      Skin Tone: <br>
+      My skin tone is
       <select name="skinTone" form="edit-account">
         <option value="11"></option>
         <option value="1">Fair</option>
@@ -234,7 +235,7 @@
         <option value="5">Dark</option>
       </select>
       <br>
-      Eye Color: <br>
+      My eyes are 
       <select name="eyeColor" form="edit-account">
         <option value="11"></option>
         <option value="1">Brown</option>
@@ -243,22 +244,25 @@
         <option value="4">Blue</option>
       </select>
       <br>
-      Hair Color: <br>
+      My hair is 
       <select name="hairColor" form="edit-account">
         <option value="11"></option>
         <option value="1">Brown</option>
         <option value="2">Black</option>
         <option value="3">Blonde</option>
         <option value="4">Red</option>
+        <option value="5">Dyed</option>
       </select>
       <br>
       <input type="submit" value="Save">
     </form>
+    <h1>My Selfies</h1>
     <a href="/upload" class="ui teal button">Add A Selfie</a>
     <div class="ui cards">
       {{#each mySelfies}}
         {{> selfie}}
       {{/each}}
     </div>
+    <h1>My Favorites</h1>
   {{/if}}
 </template>
