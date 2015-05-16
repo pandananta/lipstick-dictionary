@@ -131,7 +131,7 @@
     </div>
     <div class="description">
       <div class="ui header">{{product}} in {{shade}}</div>
-      More by <a href="/{{username}}">{{username}}</a> 
+      More by <a href="/{{username}}">{{username}}</a>
       <ul>
         <li>Applicator: {{applicationType}}</li>
         <li>Product Type: {{productType}}</li>
@@ -224,38 +224,61 @@
 <template name="account">
   {{#if currentUser}}
     <h1>My Profile</h1>
-    <form id="edit-account" class="ui form">
-      My skin tone is
-      <select name="skinTone" form="edit-account">
-        <option value="11"></option>
-        <option value="1">Fair</option>
-        <option value="2">Light</option>
-        <option value="3">Medium</option>
-        <option value="4">Tan</option>
-        <option value="5">Dark</option>
-      </select>
-      <br>
-      My eyes are 
-      <select name="eyeColor" form="edit-account">
-        <option value="11"></option>
-        <option value="1">Brown</option>
-        <option value="2">Black</option>
-        <option value="3">Green</option>
-        <option value="4">Blue</option>
-      </select>
-      <br>
-      My hair is 
-      <select name="hairColor" form="edit-account">
-        <option value="11"></option>
-        <option value="1">Brown</option>
-        <option value="2">Black</option>
-        <option value="3">Blonde</option>
-        <option value="4">Red</option>
-        <option value="5">Dyed</option>
-      </select>
-      <br>
-      <input type="submit" value="Save">
-    </form>
+    <div class="ui form">
+      <div class="two fields">
+        <div class="field">
+          <label>My skin tone is</label>
+          <div class="ui selection dropdown">
+            <input type="hidden" name="skinTone">
+            <div class="default text">Select</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item" data-value="Fair">Fair</div>
+              <div class="item" data-value="Light">Light</div>
+              <div class="item" data-value="Medium">Medium</div>
+              <div class="item" data-value="Tan">Tan</div>
+              <div class="item" data-value="Dark">Dark</div>
+            </div>
+          </div>
+        </div>
+        <div class="field"></div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <label>My eyes are</label>
+          <div class="ui selection dropdown">
+            <input type="hidden" name="eyeColor">
+            <div class="default text">Select</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item" data-value="Brown">Brown</div>
+              <div class="item" data-value="Black">Black</div>
+              <div class="item" data-value="Green">Green</div>
+              <div class="item" data-value="Blue">Blue</div>
+            </div>
+          </div>
+        </div>
+        <div class="field"></div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <label>My hair is</label>
+          <div class="ui selection dropdown">
+            <input type="hidden" name="hairColor">
+            <div class="default text">Select</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item" data-value="Brown">Brown</div>
+              <div class="item" data-value="Black">Black</div>
+              <div class="item" data-value="Red">Red</div>
+              <div class="item" data-value="Blonde">Blonde</div>
+              <div class="item" data-value="Dyed">Dyed</div>
+            </div>
+          </div>
+        </div>
+        <div class="field"></div>
+      </div>
+    </div>
     <h1>My Selfies</h1>
     <a href="/upload" class="ui teal button">Add A Selfie</a>
     <div class="ui cards">

@@ -5,10 +5,10 @@ var ATTRIBUTES = {
   applicationType: ["Gel", "Stick", "Liquid", "Pencil"],
   finish: ["Matte", "Glossy", "Silky", "Satin", "Dry"],
   intensity: ["Sheer", "Medium", "Opaque", "Intsense", "Extreme"],
-  priceGroup: ["$", "$$", "$$$"], 
+  priceGroup: ["$", "$$", "$$$"],
   skinTone: ["Fair", "Light", "Medium", "Tan", "Dark"],
   concern: ["Multi colored lips", "Small lips", "Uneven lips"],
-  hairColor: ["Brown","Black","Red","Brown", "Dyed"],
+  hairColor: ["Brown","Black","Red", "Blonde", "Dyed"],
   eyeColor: ["Brown","Black","Green","Blue"],
 };
 
@@ -137,6 +137,17 @@ if (Meteor.isClient) {
       });
       modalId = "#modal-" + id;
       return $(modalId).modal('show');
+    }
+  });
+  Template.account.events({
+    'click .ui.dropdown': function(event, template) {
+      $(event.currentTarget).dropdown();
+    },
+    'change .ui.dropdown': function(event, template) {
+      var attribute = 'profile.'+ $(event.target).val();
+      var newVal = $(event.target).attr('name');
+      Meteor.users.update({ _id: Meteor.userId()}, {$set: {attribute:newVal}});
+      console.log(Meteor.user());
     }
   });
   Template.submission.events({
