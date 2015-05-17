@@ -144,10 +144,19 @@ if (Meteor.isClient) {
       $(event.currentTarget).dropdown();
     },
     'change .ui.dropdown': function(event, template) {
-      var attribute = 'profile.'+ $(event.target).val();
-      var newVal = $(event.target).attr('name');
-      Meteor.users.update({ _id: Meteor.userId()}, {$set: {attribute:newVal}});
-      console.log(Meteor.user());
+      var attribute = $(event.target).attr('name');
+      var newVal = $(event.target).attr('value');
+      var newProfile = Meteor.user().profile;
+      newProfile[attribute] = newVal;
+      Meteor.users.update({ _id: Meteor.userId()}, {$set: {profile:newProfile}});
+    }
+  });
+  Template.account.helpers({
+    currentSelection: function(property) {
+      return Meteor.user().profile[property] || "Select";
+    },
+    selected: function(property, option) {
+      return Meteor.user().profile[property] === option;
     }
   });
   Template.submission.events({

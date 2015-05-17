@@ -230,14 +230,14 @@
           <label>My skin tone is</label>
           <div class="ui selection dropdown">
             <input type="hidden" name="skinTone">
-            <div class="default text">Select</div>
+            <div class="text">{{currentSelection 'skinTone'}}</div>
             <i class="dropdown icon"></i>
             <div class="menu">
-              <div class="item" data-value="Fair">Fair</div>
-              <div class="item" data-value="Light">Light</div>
-              <div class="item" data-value="Medium">Medium</div>
-              <div class="item" data-value="Tan">Tan</div>
-              <div class="item" data-value="Dark">Dark</div>
+              <div class="item  {{#if selected 'skinTone' 'Fair'}}selected active{{/if}}" data-value="Fair">Fair</div>
+              <div class="item  {{#if selected 'skinTone' 'Light'}}selected active{{/if}}" data-value="Light">Light</div>
+              <div class="item  {{#if selected 'skinTone' 'Medium'}}selected active{{/if}}" data-value="Medium">Medium</div>
+              <div class="item  {{#if selected 'skinTone' 'Tan'}}selected active{{/if}}" data-value="Tan">Tan</div>
+              <div class="item  {{#if selected 'skinTone' 'Dark'}}selected active{{/if}}" data-value="Dark">Dark</div>
             </div>
           </div>
         </div>
@@ -248,13 +248,13 @@
           <label>My eyes are</label>
           <div class="ui selection dropdown">
             <input type="hidden" name="eyeColor">
-            <div class="default text">Select</div>
+            <div class="text">{{currentSelection 'eyeColor'}}</div>
             <i class="dropdown icon"></i>
             <div class="menu">
-              <div class="item" data-value="Brown">Brown</div>
-              <div class="item" data-value="Black">Black</div>
-              <div class="item" data-value="Green">Green</div>
-              <div class="item" data-value="Blue">Blue</div>
+              <div class="item  {{#if selected 'eyeColor' 'Brown'}}selected active{{/if}}" data-value="Brown">Brown</div>
+              <div class="item  {{#if selected 'eyeColor' 'Black'}}selected active{{/if}}" data-value="Black">Black</div>
+              <div class="item  {{#if selected 'eyeColor' 'Green'}}selected active{{/if}}" data-value="Green">Green</div>
+              <div class="item  {{#if selected 'eyeColor' 'Blue'}}selected active{{/if}}" data-value="Blue">Blue</div>
             </div>
           </div>
         </div>
@@ -265,14 +265,14 @@
           <label>My hair is</label>
           <div class="ui selection dropdown">
             <input type="hidden" name="hairColor">
-            <div class="default text">Select</div>
+            <div class="text">{{currentSelection 'hairColor'}}</div>
             <i class="dropdown icon"></i>
             <div class="menu">
-              <div class="item" data-value="Brown">Brown</div>
-              <div class="item" data-value="Black">Black</div>
-              <div class="item" data-value="Red">Red</div>
-              <div class="item" data-value="Blonde">Blonde</div>
-              <div class="item" data-value="Dyed">Dyed</div>
+              <div class="item  {{#if selected 'hairColor' 'Brown'}}selected active{{/if}}" data-value="Brown">Brown</div>
+              <div class="item  {{#if selected 'hairColor' 'Black'}}selected active{{/if}}" data-value="Black">Black</div>
+              <div class="item  {{#if selected 'hairColor' 'Red'}}selected active{{/if}}" data-value="Red">Red</div>
+              <div class="item  {{#if selected 'hairColor' 'Blonde'}}selected active{{/if}}" data-value="Blonde">Blonde</div>
+              <div class="item  {{#if selected 'hairColor' 'Dyed'}}selected active{{/if}}" data-value="Dyed">Dyed</div>
             </div>
           </div>
         </div>
