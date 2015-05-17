@@ -42,11 +42,6 @@ if (Meteor.isClient) {
       return  Selfies.find(Session.get("filterSelections")).count() === 0;
     }
   });
-  Template.account.helpers({
-    mySelfies: function() {
-      return Selfies.find({username:Meteor.user().username});
-    }
-  });
   Template.filters.helpers({
     dropdownAttributes: function() {
       return {
@@ -129,14 +124,41 @@ if (Meteor.isClient) {
     }
   });
   Template.selfie.events({
-    'click .selfie': function(event, template) {
-      var data, id, modalId;
-      id = event.currentTarget.id;
-      data = Selfies.findOne({
-        _id: id
-      });
-      modalId = "#modal-" + id;
-      return $(modalId).modal('show');
+    'click .image': function(event, template) {
+      $(template.find('.modal')).modal('show');
+    },
+    'click .header': function(event, template) {
+      $(template.find('.modal')).modal('show');
+    },
+    'click .favorite-this': function(event, template) {
+      var newProfile = Meteor.user().profile
+      var index = -1;
+      if(!newProfile.favorites){
+        newProfile.favorites = [];
+      }
+      for (var i = 0; i < newProfile.favorites.length; i++) {
+          if(newProfile.favorites[i]._id === this._id){
+            index = i;
+            break;
+          }
+      }
+      if(index === -1){
+        newProfile.favorites.push(this);
+      }else{
+        newProfile.favorites.splice(index,1);
+      }
+      Meteor.users.update({ _id: Meteor.userId()}, {$set: {profile:newProfile}});
+    }
+  });
+  Template.selfie.helpers({
+    isFavorited: function() {
+      var favorites = Meteor.user().profile.favorites || [];
+      for (var i = 0; i < favorites.length; i++) {
+          if(favorites[i]._id === this._id){
+            return true;
+          }
+      }
+      return false;
     }
   });
   Template.account.events({
@@ -157,6 +179,12 @@ if (Meteor.isClient) {
     },
     selected: function(property, option) {
       return Meteor.user().profile[property] === option;
+    },
+    favorites: function() {
+      return Meteor.user().profile.favorites;
+    },
+    mySelfies: function() {
+      return Selfies.find({username:Meteor.user().username});
     }
   });
   Template.submission.events({
@@ -220,6 +248,7 @@ if (Meteor.isServer) {
     options.profile.concern = "multi tone";
     options.profile.hairColor = "black";
     options.profile.eyeColor = "black";
+    options.profile.favorites = [];
     if (options.profile) {
       user.profile = options.profile;
     }
