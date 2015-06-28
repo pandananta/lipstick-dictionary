@@ -10,7 +10,7 @@
 <template name="layout">
   <header>
     <a href="/"><h1>The Lipstick Dictionary</h1></a>
-    {{> loginButtons}}
+    {{> login}}
   </header>
   <div class="container">
     <div class="ui segment">
@@ -293,4 +293,21 @@
       {{/each}}
     </div>
   {{/if}}
+</template>
+
+<template name="login">
+    {{#if currentUser}}
+      <div class="ui teal buttons pull-right">
+        <div class="ui simple dropdown icon button">
+          {{currentUser.services.facebook.name}}
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" id="profile">Profile</div>
+            <div class="item" id="logout">Logout</div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+        <button id="facebook-login" class="ui teal button"> Login with Facebook</button>
+    {{/if}}
 </template>

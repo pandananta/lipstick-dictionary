@@ -42,6 +42,28 @@ if (Meteor.isClient) {
       return  Selfies.find(Session.get("filterSelections")).count() === 0;
     }
   });
+  Template.login.events({
+      'click #facebook-login': function(event) {
+          Meteor.loginWithFacebook({}, function(err){
+              if (err) {
+                  throw new Meteor.Error("Facebook login failed");
+              } else {
+                Router.go('/me');
+              }
+          });
+      },
+
+      'click #logout': function(event) {
+          Meteor.logout(function(err){
+              if (err) {
+                  throw new Meteor.Error("Logout failed");
+              }
+          })
+      },
+      'click #profile': function(event) {
+        Router.go('/me');
+      }
+  });
   Template.filters.helpers({
     dropdownAttributes: function() {
       return {
@@ -240,11 +262,21 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+  ServiceConfiguration.configurations.remove({
+    service: 'facebook'
+  });
+
+  ServiceConfiguration.configurations.insert({
+      service: 'facebook',
+      appId: '1070649046295383',
+      secret: 'c1bafcad192bc1b45b8c0c3c676d8410'
+  });
+
   Accounts.onCreateUser(function(options, user) {
     if (!options.profile) {
       options.profile = {};
     }
-    options.profile.skinTone = 3;
+    options.profile.skinTone = "Medium";
     options.profile.concern = "multi tone";
     options.profile.hairColor = "black";
     options.profile.eyeColor = "black";
